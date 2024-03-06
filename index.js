@@ -27,9 +27,9 @@ app.use(bodyParser.json());
 
 // short upload video multer section //
 
-const videoStorage = multer.diskStorage({
-  diskStorage: (req, file, cb) => {
-    const uploadPath = "ShortVideo";
+const storage1 = multer.diskStorage({
+  destination: (req, file, cb) => {
+    const uploadPath = "uploads";
     cb(null, uploadPath);
   },
   filename: (req, file, cb) => {
@@ -37,7 +37,7 @@ const videoStorage = multer.diskStorage({
   },
 });
 
-const videoUpload = multer({ storage: videoStorage });
+const uploads = multer({ storage: storage1 });
 app.use(bodyParser.json());
 
 app.post("/api/uploads", upload.single("image"), async (req, res) => {
@@ -98,10 +98,10 @@ app.get("/api/list", async (req, res) => {
 
 // upload shorts video //
 
-app.post("/api/shorts", videoUpload.single("video"), async (req, res) => {
+app.post("/api/shorts", uploads.single("video"), async (req, res) => {
   try {
     const { desc, name } = req.body;
-    const video = path.join("ShortVideo", req.file.filename);
+    const video = path.join("uploads", req.file.filename);
     let ShortsList = new Shorts({
       name,
       video,
