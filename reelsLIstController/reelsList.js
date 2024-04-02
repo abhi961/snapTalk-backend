@@ -1,4 +1,4 @@
-const follow = require('../VideoShort/Shorts')
+const Shorts = require('../VideoShort/Shorts')
 
 const reelsList =async (req,res) => {
     try {
