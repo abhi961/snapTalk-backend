@@ -12,6 +12,7 @@ const { createUser } = require("./userController/createUser");
 const { userList } = require("./userListController/userList");
 const { createReels } = require("./createReelsController/createReels");
 const { reelsList } = require("./reelsLIstController/reelsList");
+const {userLogin} = require('./Login/Login')
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -41,7 +42,9 @@ const storage1 = multer.diskStorage({
 const uploads = multer({ storage: storage1 });
 app.use(bodyParser.json());
 
+// app.post("/api/user", upload.single("image"), createUser);
 app.post("/api/user", upload.single("image"), createUser);
+app.post("/api/login", userLogin)
 
 app.get("/api/list", userList);
 
