@@ -1,5 +1,6 @@
 const follow = require('../Friendlist/Follow')
 
+
 const userList =async (req,res)=>{
     try {
         let followerlist = await follow.find();

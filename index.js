@@ -12,7 +12,12 @@ const { createUser } = require("./userController/createUser");
 const { userList } = require("./userListController/userList");
 const { createReels } = require("./createReelsController/createReels");
 const { reelsList } = require("./reelsLIstController/reelsList");
-const {userLogin} = require('./Login/Login')
+const { userLogin } = require("./Login/Login");
+const { verifyToken } = require("./token/verifytoken");
+const {conversation} = require('./conversation/controller/Conversations')
+const {ConversList} = require('./conversation/controller/conversationList')
+const {chatMessage} = require("./Message/controller/ChatMessage")
+const {getChat} = require('./Message/controller/chatList')
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -44,13 +49,18 @@ app.use(bodyParser.json());
 
 // app.post("/api/user", upload.single("image"), createUser);
 app.post("/api/user", upload.single("image"), createUser);
-app.post("/api/login", userLogin)
+app.post("/api/login", userLogin);
 
-app.get("/api/list", userList);
+app.get("/api/list", verifyToken, userList);
 
 app.post("/api/shorts", uploads.single("video"), createReels);
 
-app.get("/api/shortslist", reelsList);
+app.get("/api/shortslist", verifyToken, reelsList);
+app.post('/api/conversation', conversation);
+
+app.get('/api/conversationList/:userId',ConversList)
+app.post('/api/message', chatMessage)
+app.get('/api/getChat/:conversationId', getChat)
 
 app.listen(8000, () => {
   console.log(`server is running on 8000`);
