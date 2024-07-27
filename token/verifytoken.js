@@ -7,7 +7,7 @@ function verifyToken(req, res, next) {
     token = token.split(" ")[1];
     jwt.verify(token, jwtKey, (err, valid) => {
       if (err) {
-        res.status(401).send({result:'Please provide Valid token '});
+        res.status(401).send({result:'Please provide Valid token'});
        
       }else{
         next()

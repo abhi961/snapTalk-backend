@@ -58,10 +58,12 @@ app.post("/api/shorts", uploads.single("video"), createReels);
 app.get("/api/shortslist", verifyToken, reelsList);
 app.post('/api/conversation', conversation);
 
-app.get('/api/conversationList/:userId',ConversList)
-app.post('/api/message', chatMessage)
+app.get('/api/conversationList/:userId',verifyToken,ConversList)
+app.post('/api/message', chatMessage);
+
 app.get('/api/getChat/:conversationId', getChat)
 
 app.listen(8000, () => {
   console.log(`server is running on 8000`);
 });
+   
