@@ -4,10 +4,7 @@ const Message = require("../Message");
 const chatMessage = async (req, res) => {
   try {
     const { conversationId, senderId, message, recevierId = "" } = req.body;
-    console.log(conversationId, "CovoId");
-    console.log(senderId, "sender");
-    console.log(message, "msg");
-    console.log(recevierId, "recevierId");
+   
     if (!senderId || !message)
       return res.status(400).json({
         message: "please fill the senderId and Message",
