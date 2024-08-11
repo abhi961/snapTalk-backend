@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
 mongoose
-  .connect("mongodb://127.0.0.1:27017/snaptalk",{
+  .connect("mongodb://127.0.0.1:27017/snaptalk", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    connectTimeoutMS: 10000, 
+    bufferCommands: false,
   })
   .then(() => console.log("Database connected!"))
   .catch((err) => console.log(err));
